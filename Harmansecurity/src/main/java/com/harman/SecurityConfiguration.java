@@ -23,16 +23,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 			// TODO Auto-generated method stub
 			
 			auth.jdbcAuthentication().dataSource(dataSource)
-			.withDefaultSchema()
-			.withUser(
-					User.withUsername("dibyadas")
-					.password("mypwd")
-					.roles("USER")
-					)
-			.withUser(
-					User.withUsername("girija")
-					.password("urpwd")
-					.roles("ADMIN"));
+			.usersByUsernameQuery("select username,password,enabled"+
+			"from users"+
+					"where username =?")
+			.authoritiesByUsernameQuery("select username,authority"+
+					"from authorities"+
+					"where username =?");
 			
 		}
 		
