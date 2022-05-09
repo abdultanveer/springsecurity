@@ -12,11 +12,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		@Override
 		protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 			// TODO Auto-generated method stub
-			super.configure(auth);
+			
 			auth.inMemoryAuthentication()
 			.withUser("aditya")
 			.password("harman")
-			.roles("USER");
+			.roles("USER")
+			.and()
+			.withUser("abdul")
+			.password("ansari")
+			.roles("ADMIN");
+			
 		}
 		
 		@Bean  //@Bean means hey spring  create and inject this bean[PasswordEncoder]
