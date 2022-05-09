@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -21,7 +22,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 			// TODO Auto-generated method stub
 			
-			auth.jdbcAuthentication().dataSource(dataSource);
+			auth.jdbcAuthentication().dataSource(dataSource)
+			.withDefaultSchema()
+			.withUser(
+					User.withUsername("dibyadas")
+					.password("mypwd")
+					.roles("USER")
+					)
+			.withUser(
+					User.withUsername("girija")
+					.password("urpwd")
+					.roles("ADMIN"));
 			
 		}
 		
